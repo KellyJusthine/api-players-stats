@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Player Stats</title>
+  <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('/images/home.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+    }
+
+    nav {
+        background-color: rgba(0, 0, 51, 0.9);
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    nav ul li {
+        margin-right: 15px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .search-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+    }
+
+    .search-section form {
+        background-color: rgba(0, 0, 51, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .search-section form input, .search-section form button {
+        margin: 10px 0;
+        padding: 10px;
+        width: 80%;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .search-section form button {
+        background-color: #003366;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        color: white;
+    }
+
+    th {
+        background-color: #002244;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(0, 0, 51, 0.5);
+    }
+
+    tr:nth-child(odd) {
+        background-color: rgba(0, 0, 51, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div><h2>Player Stats</h2></div>
+  <ul>
+    <li><a href="/players/all">Show All Players</a></li>
+  </ul>
+</nav>
+
+<div class="search-section">
+  <form action="/players/search" method="get">
+    <h2>Search for Players</h2>
+    <input type="text" name="query" placeholder="Enter name, position, or nation" required>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<table th:if="${players != null}">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Height</th>
+    <th>Nation</th>
+    <th>Position</th>
+    <th>Shirt Number</th>
+    <th>Goals</th>
+    <th>Assists</th>
+    <th>Matches Played</th>
+    <th>Goals Conceded</th>
+    <th>Saves</th>
+    <th>Yellow Cards</th>
+    <th>Red Cards</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="player : ${players}">
+    <td th:text="${player.name}"></td>
+    <td th:text="${player.age}"></td>
+    <td th:text="${player.height}"></td>
+    <td th:text="${player.nation}"></td>
+    <td th:text="${player.pos}"></td>
+    <td th:text="${player.shirtNumber}"></td>
+    <td th:text="${player.gls}"></td>
+    <td th:text="${player.ast}"></td>
+    <td th:text="${player.mp}"></td>
+    <td th:text="${player.glsConceded}"></td>
+    <td th:text="${player.saves}"></td>
+    <td th:text="${player.yellowCards}"></td>
+    <td th:text="${player.redCards}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+
+
